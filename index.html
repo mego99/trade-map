@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+
+  <title>Document</title>
+  <style>
+  path {
+    stroke: black;
+    fill:white;
+  }
+  #main-map {
+    position: absolute;
+    left:0;
+    top:0;
+  }
+  .country:hover {
+    fill:purple;
+  }
+  </style>
+</head>
+<body>
+  <svg width="90vw" height="90vh" viewbox="0 0 100 100"></svg>
+</body>
+<script>
+  d3.json("world.json",function(error, world) {
+    if (error) return console.error(error);
+    var map = d3.select("body").append("svg");
+    var projection = d3.geoMercator()
+      .center([-40, 30.4]);
+
+    var path = d3.geoPath()
+      .projection(projection),
+    width = "100vw",
+    height = "100vh";
+
+    map.attr("width",width).attr("height",height).attr("id","main-map");
+
+    //
+    // console.log(world);
+    // console.log(world.objects);
+    // console.log(topojson.feature(world, world.objects.countries).features);
+    // console.log(topojson.feature(world, world.objects.countries).features[0].properties.name);
+
+
+
+    map.selectAll(".country")
+      .data(topojson.feature(world, world.objects.countries).features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("class", function(d){ return "country " +  d.properties.iso_a3});
+
+
+  })
+
+
+</script>
+</html>
