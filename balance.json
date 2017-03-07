@@ -1,0 +1,1142 @@
+[
+  {
+    "name": "Afghanistan",
+    "fullvalue": "827000000",
+    "balance": "827",
+    "iso": "AFG"
+  },
+  {
+    "name": "Albania",
+    "fullvalue": "-1612000000",
+    "balance": "-1612",
+    "iso": "ALB"
+  },
+  {
+    "name": "Algeria",
+    "fullvalue": "-25340000000",
+    "balance": "-25340",
+    "iso": "DZA"
+  },
+  {
+    "name": "Angola",
+    "fullvalue": "-4929000000",
+    "balance": "-4929",
+    "iso": "AGO"
+  },
+  {
+    "name": "Anguilla",
+    "fullvalue": "-50100000",
+    "balance": "-50",
+    "iso": "AIA"
+  },
+  {
+    "name": "Antigua and Barbuda",
+    "fullvalue": "-122000000",
+    "balance": "-122",
+    "iso": "ATG"
+  },
+  {
+    "name": "Argentina",
+    "fullvalue": "-12720000000",
+    "balance": "-12720",
+    "iso": "ARG"
+  },
+  {
+    "name": "Armenia",
+    "fullvalue": "-267000000",
+    "balance": "-267",
+    "iso": "ARM"
+  },
+  {
+    "name": "Australia",
+    "fullvalue": "-43850000000",
+    "balance": "-43850",
+    "iso": "AUS"
+  },
+  {
+    "name": "Austria",
+    "fullvalue": "10190000000",
+    "balance": "10190",
+    "iso": "AUT"
+  },
+  {
+    "name": "Azerbaijan",
+    "fullvalue": "264000000",
+    "balance": "264",
+    "iso": "AZE"
+  },
+  {
+    "name": "Bahamas",
+    "fullvalue": "-1029000000",
+    "balance": "-1029",
+    "iso": "BHS"
+  },
+  {
+    "name": "Bahrain",
+    "fullvalue": "-1499000000",
+    "balance": "-1499",
+    "iso": "BHR"
+  },
+  {
+    "name": "Bangladesh",
+    "fullvalue": "-131000000",
+    "balance": "-131",
+    "iso": "BGD"
+  },
+  {
+    "name": "Barbados",
+    "fullvalue": "-238000000",
+    "balance": "-238",
+    "iso": "BRB"
+  },
+  {
+    "name": "Belarus",
+    "fullvalue": "-2379000000",
+    "balance": "-2379",
+    "iso": "BLR"
+  },
+  {
+    "name": "Belgium",
+    "fullvalue": "585000000",
+    "balance": "585",
+    "iso": "BEL"
+  },
+  {
+    "name": "Belize",
+    "fullvalue": "-220000000",
+    "balance": "-220",
+    "iso": "BLZ"
+  },
+  {
+    "name": "Benin",
+    "fullvalue": "-892000000",
+    "balance": "-892",
+    "iso": "BEN"
+  },
+  {
+    "name": "Bhutan",
+    "fullvalue": "-579000000",
+    "balance": "-579",
+    "iso": "BTN"
+  },
+  {
+    "name": "Bolivia",
+    "fullvalue": "-2340000000",
+    "balance": "-2340",
+    "iso": "BOL"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "fullvalue": "-847000000",
+    "balance": "-847",
+    "iso": "BIH"
+  },
+  {
+    "name": "Botswana",
+    "fullvalue": "447000000",
+    "balance": "447",
+    "iso": "BWA"
+  },
+  {
+    "name": "Brazil",
+    "fullvalue": "-14110000000",
+    "balance": "-14110",
+    "iso": "BRA"
+  },
+  {
+    "name": "Brunei",
+    "fullvalue": "452000000",
+    "balance": "452",
+    "iso": "BRN"
+  },
+  {
+    "name": "Bulgaria",
+    "fullvalue": "400000000",
+    "balance": "400",
+    "iso": "BGR"
+  },
+  {
+    "name": "Burkina Faso",
+    "fullvalue": "-723000000",
+    "balance": "-723",
+    "iso": "BFA"
+  },
+  {
+    "name": "Burundi",
+    "fullvalue": "-127000000",
+    "balance": "-127",
+    "iso": "BDI"
+  },
+  {
+    "name": "Cabo Verde",
+    "fullvalue": "-130000000",
+    "balance": "-130",
+    "iso": "CPV"
+  },
+  {
+    "name": "Cambodia",
+    "fullvalue": "-1969000000",
+    "balance": "-1969",
+    "iso": "KHM"
+  },
+  {
+    "name": "Cameroon",
+    "fullvalue": "-1297000000",
+    "balance": "-1297",
+    "iso": "CMR"
+  },
+  {
+    "name": "Canada",
+    "fullvalue": "-56730000000",
+    "balance": "-56730",
+    "iso": "CAN"
+  },
+  {
+    "name": "Central African Republic",
+    "fullvalue": "-178000000",
+    "balance": "-178",
+    "iso": "CAF"
+  },
+  {
+    "name": "Chad",
+    "fullvalue": "-907000000",
+    "balance": "-907",
+    "iso": "TCD"
+  },
+  {
+    "name": "Chile",
+    "fullvalue": "-4550000000",
+    "balance": "-4550",
+    "iso": "CHL"
+  },
+  {
+    "name": "China",
+    "fullvalue": "270900000000",
+    "balance": "270900",
+    "iso": "CHN"
+  },
+  {
+    "name": "Colombia",
+    "fullvalue": "-14310000000",
+    "balance": "-14310",
+    "iso": "COL"
+  },
+  {
+    "name": "Comoros",
+    "fullvalue": "-56000000",
+    "balance": "-56",
+    "iso": "COM"
+  },
+  {
+    "name": "Congo, Democratic Republic of the",
+    "fullvalue": "-308000000",
+    "balance": "-308",
+    "iso": "COD"
+  },
+  {
+    "name": "Congo, Republic of the",
+    "fullvalue": "-728000000",
+    "balance": "-728",
+    "iso": "COG"
+  },
+  {
+    "name": "Cook Islands",
+    "fullvalue": "26670000",
+    "balance": "27",
+    "iso": "COK"
+  },
+  {
+    "name": "Costa Rica",
+    "fullvalue": "-2570000000",
+    "balance": "-2570",
+    "iso": "CRI"
+  },
+  {
+    "name": "Cote d'Ivoire",
+    "fullvalue": "-609000000",
+    "balance": "-609",
+    "iso": "CIV"
+  },
+  {
+    "name": "Croatia",
+    "fullvalue": "1514000000",
+    "balance": "1514",
+    "iso": "HRV"
+  },
+  {
+    "name": "Cuba",
+    "fullvalue": "-145700000",
+    "balance": "-146",
+    "iso": "CUB"
+  },
+  {
+    "name": "Cyprus",
+    "fullvalue": "-184000000",
+    "balance": "-184",
+    "iso": "CYP"
+  },
+  {
+    "name": "Czech Republic",
+    "fullvalue": "2976000000",
+    "balance": "2976",
+    "iso": "CZE"
+  },
+  {
+    "name": "Denmark",
+    "fullvalue": "20340000000",
+    "balance": "20340",
+    "iso": "DNK"
+  },
+  {
+    "name": "Djibouti",
+    "fullvalue": "-325000000",
+    "balance": "-325",
+    "iso": "DJI"
+  },
+  {
+    "name": "Dominica",
+    "fullvalue": "-69000000",
+    "balance": "-69",
+    "iso": "DMA"
+  },
+  {
+    "name": "Dominican Republic",
+    "fullvalue": "-1709000000",
+    "balance": "-1709",
+    "iso": "DOM"
+  },
+  {
+    "name": "Ecuador",
+    "fullvalue": "-1470000000",
+    "balance": "-1470",
+    "iso": "ECU"
+  },
+  {
+    "name": "Egypt",
+    "fullvalue": "-12180000000",
+    "balance": "-12180",
+    "iso": "EGY"
+  },
+  {
+    "name": "El Salvador",
+    "fullvalue": "-549000000",
+    "balance": "-549",
+    "iso": "SLV"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "fullvalue": "-1368000000",
+    "balance": "-1368",
+    "iso": "GNQ"
+  },
+  {
+    "name": "Eritrea",
+    "fullvalue": "10000000",
+    "balance": "10",
+    "iso": "ERI"
+  },
+  {
+    "name": "Estonia",
+    "fullvalue": "136000000",
+    "balance": "136",
+    "iso": "EST"
+  },
+  {
+    "name": "Ethiopia",
+    "fullvalue": "-7427000000",
+    "balance": "-7427",
+    "iso": "ETH"
+  },
+  {
+    "name": "Fiji",
+    "fullvalue": "-329000000",
+    "balance": "-329",
+    "iso": "FJI"
+  },
+  {
+    "name": "Finland",
+    "fullvalue": "199000000",
+    "balance": "199",
+    "iso": "FIN"
+  },
+  {
+    "name": "France",
+    "fullvalue": "-11520000000",
+    "balance": "-11520",
+    "iso": "FRA"
+  },
+  {
+    "name": "Gabon",
+    "fullvalue": "-767000000",
+    "balance": "-767",
+    "iso": "GAB"
+  },
+  {
+    "name": "Gambia",
+    "fullvalue": "-112000000",
+    "balance": "-112",
+    "iso": "GMB"
+  },
+  {
+    "name": "Georgia",
+    "fullvalue": "-1750000000",
+    "balance": "-1750",
+    "iso": "GEO"
+  },
+  {
+    "name": "Germany",
+    "fullvalue": "301400000000",
+    "balance": "301400",
+    "iso": "DEU"
+  },
+  {
+    "name": "Ghana",
+    "fullvalue": "-2693000000",
+    "balance": "-2693",
+    "iso": "GHA"
+  },
+  {
+    "name": "Greece",
+    "fullvalue": "-70000000",
+    "balance": "-70",
+    "iso": "GRC"
+  },
+  {
+    "name": "Grenada",
+    "fullvalue": "-130000000",
+    "balance": "-130",
+    "iso": "GRD"
+  },
+  {
+    "name": "Guatemala",
+    "fullvalue": "-323000000",
+    "balance": "-323",
+    "iso": "GTM"
+  },
+  {
+    "name": "Guinea",
+    "fullvalue": "-893000000",
+    "balance": "-893",
+    "iso": "GIN"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "fullvalue": "-20000000",
+    "balance": "-20",
+    "iso": "GNB"
+  },
+  {
+    "name": "Guyana",
+    "fullvalue": "72000000",
+    "balance": "72",
+    "iso": "GUY"
+  },
+  {
+    "name": "Haiti",
+    "fullvalue": "35000000",
+    "balance": "35",
+    "iso": "HTI"
+  },
+  {
+    "name": "Honduras",
+    "fullvalue": "-1197000000",
+    "balance": "-1197",
+    "iso": "HND"
+  },
+  {
+    "name": "Hong Kong",
+    "fullvalue": "8895000000",
+    "balance": "8895",
+    "iso": "HKG"
+  },
+  {
+    "name": "Hungary",
+    "fullvalue": "5720000000",
+    "balance": "5720",
+    "iso": "HUN"
+  },
+  {
+    "name": "Iceland",
+    "fullvalue": "567000000",
+    "balance": "567",
+    "iso": "ISL"
+  },
+  {
+    "name": "India",
+    "fullvalue": "-31970000000",
+    "balance": "-31970",
+    "iso": "IND"
+  },
+  {
+    "name": "Indonesia",
+    "fullvalue": "-21280000000",
+    "balance": "-21280",
+    "iso": "IDN"
+  },
+  {
+    "name": "Iran",
+    "fullvalue": "17200000000",
+    "balance": "17200",
+    "iso": "IRN"
+  },
+  {
+    "name": "Iraq",
+    "fullvalue": "-16870000000",
+    "balance": "-16870",
+    "iso": "IRQ"
+  },
+  {
+    "name": "Ireland",
+    "fullvalue": "29110000000",
+    "balance": "29110",
+    "iso": "IRL"
+  },
+  {
+    "name": "Israel",
+    "fullvalue": "9541000000",
+    "balance": "9541",
+    "iso": "ISR"
+  },
+  {
+    "name": "Italy",
+    "fullvalue": "40230000000",
+    "balance": "40230",
+    "iso": "ITA"
+  },
+  {
+    "name": "Jamaica",
+    "fullvalue": "-456000000",
+    "balance": "-456",
+    "iso": "JAM"
+  },
+  {
+    "name": "Japan",
+    "fullvalue": "176100000000",
+    "balance": "176100",
+    "iso": "JPN"
+  },
+  {
+    "name": "Jordan",
+    "fullvalue": "-3566000000",
+    "balance": "-3566",
+    "iso": "JOR"
+  },
+  {
+    "name": "Kazakhstan",
+    "fullvalue": "-2785000000",
+    "balance": "-2785",
+    "iso": "KAZ"
+  },
+  {
+    "name": "Kenya",
+    "fullvalue": "-4444000000",
+    "balance": "-4444",
+    "iso": "KEN"
+  },
+  {
+    "name": "Kiribati",
+    "fullvalue": "-12000000",
+    "balance": "-12",
+    "iso": "KIR"
+  },
+  {
+    "name": "Kuwait",
+    "fullvalue": "3939000000",
+    "balance": "3939",
+    "iso": "KWT"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "fullvalue": "-867000000",
+    "balance": "-867",
+    "iso": "KGZ"
+  },
+  {
+    "name": "Laos",
+    "fullvalue": "-2471000000",
+    "balance": "-2471",
+    "iso": "LAO"
+  },
+  {
+    "name": "Latvia",
+    "fullvalue": "-560000000",
+    "balance": "-560",
+    "iso": "LVA"
+  },
+  {
+    "name": "Lebanon",
+    "fullvalue": "-10560000000",
+    "balance": "-10560",
+    "iso": "LBN"
+  },
+  {
+    "name": "Lesotho",
+    "fullvalue": "-144000000",
+    "balance": "-144",
+    "iso": "LSO"
+  },
+  {
+    "name": "Liberia",
+    "fullvalue": "-661000000",
+    "balance": "-661",
+    "iso": "LBR"
+  },
+  {
+    "name": "Libya",
+    "fullvalue": "-18660000000",
+    "balance": "-18660",
+    "iso": "LBY"
+  },
+  {
+    "name": "Lithuania",
+    "fullvalue": "-676000000",
+    "balance": "-676",
+    "iso": "LTU"
+  },
+  {
+    "name": "Luxembourg",
+    "fullvalue": "2711000000",
+    "balance": "2711",
+    "iso": "LUX"
+  },
+  {
+    "name": "Macedonia",
+    "fullvalue": "-194000000",
+    "balance": "-194",
+    "iso": "MKD"
+  },
+  {
+    "name": "Madagascar",
+    "fullvalue": "-223000000",
+    "balance": "-223",
+    "iso": "MDG"
+  },
+  {
+    "name": "Malawi",
+    "fullvalue": "-863000000",
+    "balance": "-863",
+    "iso": "MWI"
+  },
+  {
+    "name": "Malaysia",
+    "fullvalue": "3646000000",
+    "balance": "3646",
+    "iso": "MYS"
+  },
+  {
+    "name": "Maldives",
+    "fullvalue": "-389000000",
+    "balance": "-389",
+    "iso": "MDV"
+  },
+  {
+    "name": "Mali",
+    "fullvalue": "-848000000",
+    "balance": "-848",
+    "iso": "MLI"
+  },
+  {
+    "name": "Malta",
+    "fullvalue": "653000000",
+    "balance": "653",
+    "iso": "MLT"
+  },
+  {
+    "name": "Marshall Islands",
+    "fullvalue": "-14000000",
+    "balance": "-14",
+    "iso": "MHL"
+  },
+  {
+    "name": "Mauritania",
+    "fullvalue": "-1033000000",
+    "balance": "-1033",
+    "iso": "MRT"
+  },
+  {
+    "name": "Mauritius",
+    "fullvalue": "-509000000",
+    "balance": "-509",
+    "iso": "MUS"
+  },
+  {
+    "name": "Mexico",
+    "fullvalue": "-29030000000",
+    "balance": "-29030",
+    "iso": "MEX"
+  },
+  {
+    "name": "Micronesia",
+    "fullvalue": "3000000",
+    "balance": "3",
+    "iso": "FSM"
+  },
+  {
+    "name": "Moldova",
+    "fullvalue": "-189000000",
+    "balance": "-189",
+    "iso": "MDA"
+  },
+  {
+    "name": "Mongolia",
+    "fullvalue": "-1241000000",
+    "balance": "-1241",
+    "iso": "MNG"
+  },
+  {
+    "name": "Montenegro",
+    "fullvalue": "-437000000",
+    "balance": "-437",
+    "iso": "MNE"
+  },
+  {
+    "name": "Morocco",
+    "fullvalue": "-1276000000",
+    "balance": "-1276",
+    "iso": "MAR"
+  },
+  {
+    "name": "Mozambique",
+    "fullvalue": "-4035000000",
+    "balance": "-4035",
+    "iso": "MOZ"
+  },
+  {
+    "name": "Namibia",
+    "fullvalue": "-1268000000",
+    "balance": "-1268",
+    "iso": "NAM"
+  },
+  {
+    "name": "Nepal",
+    "fullvalue": "831000000",
+    "balance": "831",
+    "iso": "NPL"
+  },
+  {
+    "name": "Netherlands",
+    "fullvalue": "69820000000",
+    "balance": "69820",
+    "iso": "NLD"
+  },
+  {
+    "name": "New Zealand",
+    "fullvalue": "-5385000000",
+    "balance": "-5385",
+    "iso": "NZL"
+  },
+  {
+    "name": "Nicaragua",
+    "fullvalue": "-1077000000",
+    "balance": "-1077",
+    "iso": "NIC"
+  },
+  {
+    "name": "Niger",
+    "fullvalue": "-1350000000",
+    "balance": "-1350",
+    "iso": "NER"
+  },
+  {
+    "name": "Nigeria",
+    "fullvalue": "-2856000000",
+    "balance": "-2856",
+    "iso": "NGA"
+  },
+  {
+    "name": "Norway",
+    "fullvalue": "26230000000",
+    "balance": "26230",
+    "iso": "NOR"
+  },
+  {
+    "name": "Oman",
+    "fullvalue": "-12710000000",
+    "balance": "-12710",
+    "iso": "OMN"
+  },
+  {
+    "name": "Pakistan",
+    "fullvalue": "-2627000000",
+    "balance": "-2627",
+    "iso": "PAK"
+  },
+  {
+    "name": "Palau",
+    "fullvalue": "-16000000",
+    "balance": "-16",
+    "iso": "PLW"
+  },
+  {
+    "name": "Panama",
+    "fullvalue": "-3029000000",
+    "balance": "-3029",
+    "iso": "PAN"
+  },
+  {
+    "name": "Papua New Guinea",
+    "fullvalue": "1484000000",
+    "balance": "1484",
+    "iso": "PNG"
+  },
+  {
+    "name": "Paraguay",
+    "fullvalue": "172000000",
+    "balance": "172",
+    "iso": "PRY"
+  },
+  {
+    "name": "Peru",
+    "fullvalue": "-6801000000",
+    "balance": "-6801",
+    "iso": "PER"
+  },
+  {
+    "name": "Philippines",
+    "fullvalue": "5542000000",
+    "balance": "5542",
+    "iso": "PHL"
+  },
+  {
+    "name": "Poland",
+    "fullvalue": "-250000000",
+    "balance": "-250",
+    "iso": "POL"
+  },
+  {
+    "name": "Portugal",
+    "fullvalue": "46000000",
+    "balance": "46",
+    "iso": "PRT"
+  },
+  {
+    "name": "Qatar",
+    "fullvalue": "-2885000000",
+    "balance": "-2885",
+    "iso": "QAT"
+  },
+  {
+    "name": "Romania",
+    "fullvalue": "-3733000000",
+    "balance": "-3733",
+    "iso": "ROU"
+  },
+  {
+    "name": "Russia",
+    "fullvalue": "38560000000",
+    "balance": "38560",
+    "iso": "RUS"
+  },
+  {
+    "name": "Rwanda",
+    "fullvalue": "-1385000000",
+    "balance": "-1385",
+    "iso": "RWA"
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "fullvalue": "-164000000",
+    "balance": "-164",
+    "iso": "KNA"
+  },
+  {
+    "name": "Saint Lucia",
+    "fullvalue": "-96000000",
+    "balance": "-96",
+    "iso": "LCA"
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "fullvalue": "-176000000",
+    "balance": "-176",
+    "iso": "VCT"
+  },
+  {
+    "name": "Samoa",
+    "fullvalue": "-29000000",
+    "balance": "-29",
+    "iso": "WSM"
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "fullvalue": "-44000000",
+    "balance": "-44",
+    "iso": "STP"
+  },
+  {
+    "name": "Saudi Arabia",
+    "fullvalue": "-42280000000",
+    "balance": "-42280",
+    "iso": "SAU"
+  },
+  {
+    "name": "Senegal",
+    "fullvalue": "-1244000000",
+    "balance": "-1244",
+    "iso": "SEN"
+  },
+  {
+    "name": "Serbia",
+    "fullvalue": "-1596000000",
+    "balance": "-1596",
+    "iso": "SRB"
+  },
+  {
+    "name": "Seychelles",
+    "fullvalue": "-265000000",
+    "balance": "-265",
+    "iso": "SYC"
+  },
+  {
+    "name": "Sierra Leone",
+    "fullvalue": "-696000000",
+    "balance": "-696",
+    "iso": "SLE"
+  },
+  {
+    "name": "Singapore",
+    "fullvalue": "57260000000",
+    "balance": "57260",
+    "iso": "SGP"
+  },
+  {
+    "name": "Slovakia",
+    "fullvalue": "-885000000",
+    "balance": "-885",
+    "iso": "SVK"
+  },
+  {
+    "name": "Slovenia",
+    "fullvalue": "3398000000",
+    "balance": "3398",
+    "iso": "SVN"
+  },
+  {
+    "name": "Solomon Islands",
+    "fullvalue": "-54000000",
+    "balance": "-54",
+    "iso": "SLB"
+  },
+  {
+    "name": "Somalia",
+    "fullvalue": "-644000000",
+    "balance": "-644",
+    "iso": "SOM"
+  },
+  {
+    "name": "South Africa",
+    "fullvalue": "-9382000000",
+    "balance": "-9382",
+    "iso": "ZAF"
+  },
+  {
+    "name": "South Korea",
+    "fullvalue": "101600000000",
+    "balance": "101600",
+    "iso": "KOR"
+  },
+  {
+    "name": "South Sudan",
+    "fullvalue": "-13000000",
+    "balance": "-13",
+    "iso": "SSD"
+  },
+  {
+    "name": "Spain",
+    "fullvalue": "24290000000",
+    "balance": "24290",
+    "iso": "ESP"
+  },
+  {
+    "name": "Sri Lanka",
+    "fullvalue": "-1231000000",
+    "balance": "-1231",
+    "iso": "LKA"
+  },
+  {
+    "name": "Sudan",
+    "fullvalue": "-5545000000",
+    "balance": "-5545",
+    "iso": "SDN"
+  },
+  {
+    "name": "Suriname",
+    "fullvalue": "-174000000",
+    "balance": "-174",
+    "iso": "SUR"
+  },
+  {
+    "name": "Swaziland",
+    "fullvalue": "-167000000",
+    "balance": "-167",
+    "iso": "SWZ"
+  },
+  {
+    "name": "Sweden",
+    "fullvalue": "26030000000",
+    "balance": "26030",
+    "iso": "SWE"
+  },
+  {
+    "name": "Switzerland",
+    "fullvalue": "61200000000",
+    "balance": "61200",
+    "iso": "CHE"
+  },
+  {
+    "name": "Syria",
+    "fullvalue": "-3148000000",
+    "balance": "-3148",
+    "iso": "SYR"
+  },
+  {
+    "name": "Taiwan",
+    "fullvalue": "77900000000",
+    "balance": "77900",
+    "iso": "TWN"
+  },
+  {
+    "name": "Tajikistan",
+    "fullvalue": "-331000000",
+    "balance": "-331",
+    "iso": "TJK"
+  },
+  {
+    "name": "Tanzania",
+    "fullvalue": "-4121000000",
+    "balance": "-4121",
+    "iso": "TZA"
+  },
+  {
+    "name": "Thailand",
+    "fullvalue": "37690000000",
+    "balance": "37690",
+    "iso": "THA"
+  },
+  {
+    "name": "Timor-Leste",
+    "fullvalue": "-248000000",
+    "balance": "-248",
+    "iso": "TLS"
+  },
+  {
+    "name": "Togo",
+    "fullvalue": "-361000000",
+    "balance": "-361",
+    "iso": "TGO"
+  },
+  {
+    "name": "Tonga",
+    "fullvalue": "-33000000",
+    "balance": "-33",
+    "iso": "TON"
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "fullvalue": "-1975000000",
+    "balance": "-1975",
+    "iso": "TTO"
+  },
+  {
+    "name": "Tunisia",
+    "fullvalue": "-3397000000",
+    "balance": "-3397",
+    "iso": "TUN"
+  },
+  {
+    "name": "Turkey",
+    "fullvalue": "-32120000000",
+    "balance": "-32120",
+    "iso": "TUR"
+  },
+  {
+    "name": "Turkmenistan",
+    "fullvalue": "-6780000000",
+    "balance": "-6780",
+    "iso": "TKM"
+  },
+  {
+    "name": "Tuvalu",
+    "fullvalue": "-1000000",
+    "balance": "-1",
+    "iso": "TUV"
+  },
+  {
+    "name": "Uganda",
+    "fullvalue": "-2230000000",
+    "balance": "-2230",
+    "iso": "UGA"
+  },
+  {
+    "name": "Ukraine",
+    "fullvalue": "-1315000000",
+    "balance": "-1315",
+    "iso": "UKR"
+  },
+  {
+    "name": "United Arab Emirates",
+    "fullvalue": "4244000000",
+    "balance": "4244",
+    "iso": "ARE"
+  },
+  {
+    "name": "United Kingdom",
+    "fullvalue": "-157300000000",
+    "balance": "-157300",
+    "iso": "GBR"
+  },
+  {
+    "name": "United States",
+    "fullvalue": "-469400000000",
+    "balance": "-469400",
+    "iso": "USA"
+  },
+  {
+    "name": "Uruguay",
+    "fullvalue": "-1586000000",
+    "balance": "-1586",
+    "iso": "URY"
+  },
+  {
+    "name": "Uzbekistan",
+    "fullvalue": "64000000",
+    "balance": "64",
+    "iso": "UZB"
+  },
+  {
+    "name": "Vanuatu",
+    "fullvalue": "-129000000",
+    "balance": "-129",
+    "iso": "VUT"
+  },
+  {
+    "name": "Venezuela",
+    "fullvalue": "-11210000000",
+    "balance": "-11210",
+    "iso": "VEN"
+  },
+  {
+    "name": "Vietnam",
+    "fullvalue": "770000000",
+    "balance": "770",
+    "iso": "VNM"
+  },
+  {
+    "name": "Yemen",
+    "fullvalue": "-1920000000",
+    "balance": "-1920",
+    "iso": "YEM"
+  },
+  {
+    "name": "Zambia",
+    "fullvalue": "-932000000",
+    "balance": "-932",
+    "iso": "ZMB"
+  },
+  {
+    "name": "Zimbabwe",
+    "fullvalue": "-1069000000",
+    "balance": "-1069",
+    "iso": "ZWE"
+  }
+]

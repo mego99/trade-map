@@ -9,50 +9,103 @@
 
   <title>Document</title>
   <style>
+  body {
+    margin:0;
+    width:100%;
+    height:100%;
+    background-color: cornflowerblue;
+  }
   path {
-    stroke: black;
-    fill:white;
+    stroke: #595959;
+    stroke-linejoin:round;
+    stroke-width:.5;
   }
   #main-map {
     position: absolute;
     left:0;
     top:0;
+    overflow:visible;
+    padding-bottom:40%;
+    width:100%;
+    height:100%;
   }
   .country:hover {
-    fill:purple;
+    fill:#6ba2fe;
+    transition: 0.2s;
+  }
+  .wrapper {
+    position: relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
   }
   </style>
 </head>
 <body>
-  <svg width="90vw" height="90vh" viewbox="0 0 100 100"></svg>
+  <div class="wrapper">
+    <svg id="main-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMin meet"></svg>
+  </div>
+
 </body>
 <script>
+  "use strict";
   d3.json("world.json",function(error, world) {
     if (error) return console.error(error);
-    var map = d3.select("body").append("svg");
+    var map = d3.select("#main-map");
     var projection = d3.geoMercator()
-      .center([-40, 30.4]);
+      .center([0, 30.4]);
 
     var path = d3.geoPath()
-      .projection(projection),
-    width = "100vw",
-    height = "100vh";
+      .projection(projection);
 
-    map.attr("width",width).attr("height",height).attr("id","main-map");
-
-    //
-    // console.log(world);
-    // console.log(world.objects);
-    // console.log(topojson.feature(world, world.objects.countries).features);
-    // console.log(topojson.feature(world, world.objects.countries).features[0].properties.name);
+    var gdpScale = d3.scaleLinear()
+      .domain([0,50000,1000000,20000000])
+      .range(["aliceblue","powderblue","plum","salmon"]);
 
 
-
-    map.selectAll(".country")
+    var countries = map.selectAll(".country")
       .data(topojson.feature(world, world.objects.countries).features)
     .enter().append("path")
       .attr("d", path)
-      .attr("class", function(d){ return "country " +  d.properties.iso_a3});
+      .attr("class", function(d){ return "country " +  d.properties.iso_a3})
+      .attr("fill", function(d){  return gdpScale(+d.properties.gdp_md_est)});
+
+    console.log("wow");
+
+    console.log(countries);
+
+      d3.csv('bal2.csv',
+        function row(d){
+
+          return {
+            name: d.iso + "",
+            balanceValue: +d.balanceMils
+          };
+        },
+      function(error, balanceData) {
+        if (error) return console.error(error);
+        console.log(balanceData);
+
+
+
+
+
+        var balanceScale = d3.scaleLinear()
+          .domain(d3.extent(balanceData, function(d) { return d.balanceValue}))
+          .range(["aliceblue","orchid"]);
+
+        console.log(balanceScale(0));
+        console.log(balanceScale(-10000));
+        console.log(balanceScale(500000));
+
+        countries.attr("id",function(d){return d.properties.iso_a3})
+
+
+        var selection = d3.selectAll("path.countries").filter(function(d) {console.log(d); return d.properties.iso_a3 == "AUS"});
+        console.log(selection);
+
+      });
+
 
 
   })
