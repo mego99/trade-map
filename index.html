@@ -50,6 +50,13 @@
     height:100vh;
     overflow:hidden;
   }
+  .text {
+    z-index:100;
+  }
+  .flow-line {
+    stroke-opacity:0.5;
+    stroke:black;
+  }
   </style>
 </head>
 <body>
@@ -81,42 +88,18 @@
     gdpFirstQ = (gdpMin + gdpHalf) / 2,
     gdpSecondQ = (gdpMax + gdpHalf) / 2;
 
-    console.log(gdpMin, gdpFirstQ, gdpHalf, gdpSecondQ, gdpMax)
-
+    //set domain and range for gdp color scale
     var gdpScale = d3.scaleLog()
       .domain([761, 18036648])
       .range(["#5cb1f7","#eb384e"]);
 
-console.log(gdpScale(761));
-console.log(gdpScale(18036648));
-
-map.append("g")
-.selectAll("text")
-  .data(countrydata)
-.enter()
-    .append("text")
-      .text(function(d) {return d.properties.name})
-      .attr("transform",function(d) {return "translate(" + path.centroid(d) + ")"})
-      .attr("dx","3px")
-      .attr("dy","4px");
-
-
-var countrywrapper = map.select("g.countries").append("g.countries")
-  .data(countrydata);
-
-
-    var countries = map.selectAll("g")
+    //add country topography
+    var countries = map.append("g").attr("class","countries").selectAll("path")
       .data(countrydata)
-      .enter()
-        .append("g");
-
-      countries.append("path")
-
+      .enter().append("path")
         .attr("d", path)
         .attr("class", function(d){ return "country " +  d.id})
         .attr("fill", function(d){
-          // console.log(d.properties.gdp);
-          // console.log(gdpScale(d.properties.gdp));
             return (d.properties.gdp == null) ?  "#e9fcff" : gdpScale(+d.properties.gdp)
         })
         .attr("stroke",function(d){
@@ -124,22 +107,7 @@ var countrywrapper = map.select("g.countries").append("g.countries")
           return (d.properties.balance == true) ? "blue" : "white"
         });
 
-
-      countries.filter(function(d){
-        if(d.properties.name) {return d}})
-        .append("circle")
-          .attr("r","1")
-          .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
-
-    //
-    // countries.append("text")
-    //   .text(function(d) {return d.properties.name})
-
-    console.log("wow");
-
-    console.log(countries);
-
-
+    //import trade flow data
     d3.csv('tradeflow2.csv',function row(d) {
       return {
         reporter: d.reporterIso,
@@ -148,86 +116,63 @@ var countrywrapper = map.select("g.countries").append("g.countries")
         flowType: +d.flowBinary,
         flowRank: +d.flowRank
       }
-    },
-    function(error, flow) {
+      },
+      function(error, flow) {
 
-
-      console.log(flow);
-      console.log(flow.filter(function(d){
-        if (d.reporter == "USA") {return d}
-      }));
-
-      function filterFlow(key) {
-        var list = [];
-        flow.filter(function(x) {
-          if (x.reporter == key) {
-            list.push(x);
-          }
-        });
-        return list;
-      };
-
-      var flowCountries = d3.nest()
-        .key(function(d){return d.reporter})
-        .entries(flow);
-
-      console.log(flowCountries);
-
-
-
-      function filterCountry(key) {
-        var rep = countrydata.filter(function(d) {
-          if (d.id == key.reporter) {
-            return d;
-          }
-        });
-        var part = countrydata.filter(function(d) {
-          if (d.id == key.partner) {
-            return d;
-          }
-        });
-        return [rep, part];
-      };
-
-      var flowLayer = map.append("g.flows");
-
-      map.append("g")
-      .selectAll(".flow")
-        .data(flow)
-      .enter()
-        .append("path")
-          // .attr("transform",function(d) {
-          //   var country = filterCountry(d);
-          //   // console.log(country)
-          //   return "translate(" + path.centroid(country[0][0]) + ")"
-          // })
-          .attr("d",function(d) {
-            // var flow = filterFlow(d.id);
-
-            // console.log(flow);
-            var country = filterCountry(d);
-            var x1 = path.centroid(country[0][0])[0];
-            var y1 = path.centroid(country[0][0])[1];
-            var x2 = path.centroid(country[1][0])[0];
-            var y2 = path.centroid(country[1][0])[1];
-            var text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
-            // console.log(text);
-
-            return text;
+        //function that returns matching topography groups when passed a country code
+        function filterCountry(key) {
+          var rep = countrydata.filter(function(d) {
+            if (d.id == key.reporter) {
+              return d;
+            }
           });
-          // .text(function(d) {
-          //   var list = flow.filter(function(x) { if (x.reporter == "JPN") {return x} });
-          //   console.log(list);
-          //   var text = "";
-          //   for (var i in list) {
-          //     text += list[i].partner;
-          //   };
-          //   return text;
-          // });
-    }
-  )
+          var part = countrydata.filter(function(d) {
+            if (d.id == key.partner) {
+              return d;
+            }
+          });
+          return [rep, part];
+        };
+
+        //create svg group to append flow lines into
+        var flowLayer = map.append("g").attr("class","flow");
+
+        //draw trade lines
+        map.append("g")
+        .selectAll(".flow")
+          .data(flow)
+        .enter()
+          .append("path")
+            .attr("d",function(d) {
+              var country = filterCountry(d);
+              var x1 = path.centroid(country[0][0])[0];
+              var y1 = path.centroid(country[0][0])[1];
+              var x2 = path.centroid(country[1][0])[0];
+              var y2 = path.centroid(country[1][0])[1];
+              var text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
+              return text;
+            })
+            .attr("class","flow-line");
+        }
+      )
+
+    //add svg group for text and append country name labels
+    var textLayer = map.append("g").attr("class","text")
+      .selectAll("text")
+        .data(countrydata)
+      .enter()
+          .append("text")
+            .text(function(d) {return d.properties.name})
+            .attr("transform",function(d) {return "translate(" + path.centroid(d) + ")"})
+            .attr("dx","3px")
+            .attr("dy","4px");
+
+    //draw point cicles next to country name labels 
+    textLayer.filter(function(d){
+      if(d.properties.name) {return d}})
+      .append("circle")
+        .attr("r","1")
+        .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
   })
-
-
 </script>
 </html>
