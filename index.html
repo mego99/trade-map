@@ -9,16 +9,26 @@
 
   <title>Document</title>
   <style>
+  @import url('https://fonts.googleapis.com/css?family=Oswald:300,400');
   body {
     margin:0;
     width:100%;
     height:100%;
-    background-color: cornflowerblue;
+    background-color: #62eaee;
+    font-family: 'Oswald', sans-serif;
+    font-weight:300;
   }
   path {
-    stroke: #595959;
+    stroke: white;
     stroke-linejoin:round;
     stroke-width:.5;
+  }
+  text {
+    font-size:.6em;
+  }
+  circle {
+    fill:none;
+    stroke:black;
   }
   #main-map {
     position: absolute;
@@ -30,7 +40,8 @@
     height:100%;
   }
   .country:hover {
-    fill:#6ba2fe;
+    stroke:red;
+    stroke-width:1;
     transition: 0.2s;
   }
   .wrapper {
@@ -51,6 +62,9 @@
   "use strict";
   d3.json("world.json",function(error, world) {
     if (error) return console.error(error);
+
+    //IMPORTANT VARIABLES
+    var countrydata = topojson.feature(world, world.objects.countries).features;
     var map = d3.select("#main-map");
     var projection = d3.geoMercator()
       .center([0, 30.4]);
@@ -58,56 +72,160 @@
     var path = d3.geoPath()
       .projection(projection);
 
-    var gdpScale = d3.scaleLinear()
-      .domain([0,50000,1000000,20000000])
-      .range(["aliceblue","powderblue","plum","salmon"]);
+    console.log(path);
+
+    //set up color scale for gdp
+    var gdpMin = d3.min(countrydata, function(d) {return +d.properties.gdp}),
+    gdpMax = d3.max(countrydata, function(d) {return +d.properties.gdp}),
+    gdpHalf = (gdpMin + gdpMax) / 2,
+    gdpFirstQ = (gdpMin + gdpHalf) / 2,
+    gdpSecondQ = (gdpMax + gdpHalf) / 2;
+
+    console.log(gdpMin, gdpFirstQ, gdpHalf, gdpSecondQ, gdpMax)
+
+    var gdpScale = d3.scaleLog()
+      .domain([761, 18036648])
+      .range(["#5cb1f7","#eb384e"]);
+
+console.log(gdpScale(761));
+console.log(gdpScale(18036648));
+
+map.append("g")
+.selectAll("text")
+  .data(countrydata)
+.enter()
+    .append("text")
+      .text(function(d) {return d.properties.name})
+      .attr("transform",function(d) {return "translate(" + path.centroid(d) + ")"})
+      .attr("dx","3px")
+      .attr("dy","4px");
 
 
-    var countries = map.selectAll(".country")
-      .data(topojson.feature(world, world.objects.countries).features)
-    .enter().append("path")
-      .attr("d", path)
-      .attr("class", function(d){ return "country " +  d.properties.iso_a3})
-      .attr("fill", function(d){  return gdpScale(+d.properties.gdp_md_est)});
+var countrywrapper = map.select("g.countries").append("g.countries")
+  .data(countrydata);
+
+
+    var countries = map.selectAll("g")
+      .data(countrydata)
+      .enter()
+        .append("g");
+
+      countries.append("path")
+
+        .attr("d", path)
+        .attr("class", function(d){ return "country " +  d.id})
+        .attr("fill", function(d){
+          // console.log(d.properties.gdp);
+          // console.log(gdpScale(d.properties.gdp));
+            return (d.properties.gdp == null) ?  "#e9fcff" : gdpScale(+d.properties.gdp)
+        })
+        .attr("stroke",function(d){
+          console.log(d.properties.eu);
+          return (d.properties.balance == true) ? "blue" : "white"
+        });
+
+
+      countries.filter(function(d){
+        if(d.properties.name) {return d}})
+        .append("circle")
+          .attr("r","1")
+          .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
+
+    //
+    // countries.append("text")
+    //   .text(function(d) {return d.properties.name})
 
     console.log("wow");
 
     console.log(countries);
 
-      d3.csv('bal2.csv',
-        function row(d){
 
-          return {
-            name: d.iso + "",
-            balanceValue: +d.balanceMils
-          };
-        },
-      function(error, balanceData) {
-        if (error) return console.error(error);
-        console.log(balanceData);
-
-
+    d3.csv('tradeflow2.csv',function row(d) {
+      return {
+        reporter: d.reporterIso,
+        partner: d.partnerIso,
+        flowValue: +d.value,
+        flowType: +d.flowBinary,
+        flowRank: +d.flowRank
+      }
+    },
+    function(error, flow) {
 
 
+      console.log(flow);
+      console.log(flow.filter(function(d){
+        if (d.reporter == "USA") {return d}
+      }));
 
-        var balanceScale = d3.scaleLinear()
-          .domain(d3.extent(balanceData, function(d) { return d.balanceValue}))
-          .range(["aliceblue","orchid"]);
+      function filterFlow(key) {
+        var list = [];
+        flow.filter(function(x) {
+          if (x.reporter == key) {
+            list.push(x);
+          }
+        });
+        return list;
+      };
 
-        console.log(balanceScale(0));
-        console.log(balanceScale(-10000));
-        console.log(balanceScale(500000));
+      var flowCountries = d3.nest()
+        .key(function(d){return d.reporter})
+        .entries(flow);
 
-        countries.attr("id",function(d){return d.properties.iso_a3})
-
-
-        var selection = d3.selectAll("path.countries").filter(function(d) {console.log(d); return d.properties.iso_a3 == "AUS"});
-        console.log(selection);
-
-      });
+      console.log(flowCountries);
 
 
 
+      function filterCountry(key) {
+        var rep = countrydata.filter(function(d) {
+          if (d.id == key.reporter) {
+            return d;
+          }
+        });
+        var part = countrydata.filter(function(d) {
+          if (d.id == key.partner) {
+            return d;
+          }
+        });
+        return [rep, part];
+      };
+
+      var flowLayer = map.append("g.flows");
+
+      map.append("g")
+      .selectAll(".flow")
+        .data(flow)
+      .enter()
+        .append("path")
+          // .attr("transform",function(d) {
+          //   var country = filterCountry(d);
+          //   // console.log(country)
+          //   return "translate(" + path.centroid(country[0][0]) + ")"
+          // })
+          .attr("d",function(d) {
+            // var flow = filterFlow(d.id);
+
+            // console.log(flow);
+            var country = filterCountry(d);
+            var x1 = path.centroid(country[0][0])[0];
+            var y1 = path.centroid(country[0][0])[1];
+            var x2 = path.centroid(country[1][0])[0];
+            var y2 = path.centroid(country[1][0])[1];
+            var text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
+            // console.log(text);
+
+            return text;
+          });
+          // .text(function(d) {
+          //   var list = flow.filter(function(x) { if (x.reporter == "JPN") {return x} });
+          //   console.log(list);
+          //   var text = "";
+          //   for (var i in list) {
+          //     text += list[i].partner;
+          //   };
+          //   return text;
+          // });
+    }
+  )
   })
 
 
