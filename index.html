@@ -56,10 +56,15 @@
     z-index:100;
   }
   .flow-line {
-    stroke-opacity:0.05;
-    stroke-width:2;
-    stroke:blue;
+    stroke-opacity:0.5;
+    stroke-width:.8;
     stroke-linecap:round;
+  }
+  .flowtype-export {
+    stroke:blue;
+  }
+  .flowtype-import {
+    stroke:yellow;
   }
   </style>
 </head>
@@ -101,10 +106,9 @@
         .attr("d", path)
         .attr("class", function(d){ return "country " +  d.id})
         .attr("fill", function(d){
-            return (d.properties.gdp == null) ?  "#e9fcff" : gdpScale(+d.properties.gdp)
+            return (d.properties.gdp == null) ?  "#c3c3c3" : gdpScale(+d.properties.gdp)
         })
         .attr("stroke",function(d){
-          console.log(d.properties.eu);
           return (d.properties.eu == true) ? "blue" : "white"
         });
 
@@ -141,19 +145,27 @@
         //draw trade lines
         flowLayer.append("g")
         .selectAll(".flow")
-          .data(flow)
+            .data(flow)
         .enter()
+        .filter(function(d){
+          if (+d.flowRank == 1) { return d}
+        })
           .append("path")
             .attr("d",function(d) {
-              var country = filterCountry(d);
-              var x1 = path.centroid(country[0][0])[0];
-              var y1 = path.centroid(country[0][0])[1];
-              var x2 = path.centroid(country[1][0])[0];
-              var y2 = path.centroid(country[1][0])[1];
-              var text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
+              let country = filterCountry(d),
+              x1 = path.centroid(country[0][0])[0],
+              y1 = path.centroid(country[0][0])[1],
+              x2 = path.centroid(country[1][0])[0],
+              y2 = path.centroid(country[1][0])[1],
+              text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
               return text;
             })
-            .attr("class","flow-line")
+            .attr("class",function(d) {
+              // console.log(+d.flowBinary);
+              let flowType;
+              (+d.flowType == 0) ? flowType = "export" : flowType = "import";
+              return "flow-line flowtype-" + flowType;
+            })
             .style("opacity","0")
           .transition().style("opacity","1").duration(100);
 
@@ -174,7 +186,6 @@
           .selectAll("g")
             .data(countrydata)
             .filter(function(d){
-              console.log(d.properties.name);
               if(typeof d.properties.name != 'undefined') {return d}
             })
             .append("circle")
