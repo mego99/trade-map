@@ -64,13 +64,20 @@
     stroke:blue;
   }
   .flowtype-import {
-    stroke:yellow;
+    stroke:url('#flowGrad');
   }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <svg id="main-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMin meet"></svg>
+    <svg id="main-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMin meet">
+      <defs>
+        <linearGradient id="flowGrad">
+            <stop offset="5%"  stop-color="yellow"/>
+            <stop offset="95%" stop-color="blue"/>
+        </linearGradient>
+    </defs>
+    </svg>
   </div>
 
 </body>
@@ -82,7 +89,9 @@
     //set up variables
     var countrydata = topojson.feature(world, world.objects.countries).features;
     var map = d3.select("#main-map");
+    //defining projection: Mercator, Equirectangular, AzimuthalEqualArea, ConicConformal
     var projection = d3.geoMercator()
+      .clipExtent(null)
       .center([0, 30.4]);
     var path = d3.geoPath()
       .projection(projection);
@@ -99,6 +108,11 @@
       .domain([761, 18036648])
       .range(["#5cb1f7","#eb384e"]);
 
+    //balanceScale: d3.extent(countrydata, function(d) {return +d.properties.balance})
+    var balanceScale = d3.scaleLinear()
+      .domain([-469400, 0 ,301400])
+      .range(['#ff5d5d','#7680de','#3941ff']);
+
     //add country topography
     var countries = map.append("g").attr("class","countries").selectAll("path")
       .data(countrydata)
@@ -106,6 +120,7 @@
         .attr("d", path)
         .attr("class", function(d){ return "country " +  d.id})
         .attr("fill", function(d){
+            // return (d.properties.balance == null) ?  "#c3c3c3" : balanceScale(+d.properties.balance)
             return (d.properties.gdp == null) ?  "#c3c3c3" : gdpScale(+d.properties.gdp)
         })
         .attr("stroke",function(d){
@@ -152,7 +167,7 @@
         })
           .append("path")
             .attr("d",function(d) {
-              var country = filterCountry(d),
+              let country = filterCountry(d),
               x1 = path.centroid(country[0][0])[0],
               y1 = path.centroid(country[0][0])[1],
               x2 = path.centroid(country[1][0])[0],
