@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://d3js.org/d3.v4.js"></script>
-  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="scripts/d3.v4.0.0-rc.2.min.js"></script>
+  <script src="scripts/topojson.v1.min.js"></script>
+  <script src="scripts/d3-geo-projection.v1.min.js"></script>
 
   <title>Document</title>
   <style>
@@ -18,17 +19,18 @@
     font-family: 'Oswald', sans-serif;
     font-weight:300;
   }
-  path {
-    stroke: white;
+  path.country {
     stroke-linejoin:round;
     stroke-width:.5;
+    /*stroke:none;*/
   }
   text {
-    font-size:.6em;
+    font-size:.3em;
   }
   circle {
     fill:none;
     stroke:black;
+    stroke-width:.5;
   }
   #main-map {
     position: absolute;
@@ -39,11 +41,11 @@
     width:100%;
     height:100%;
   }
-  .country:hover {
+  /*.country:hover {
     stroke:red;
     stroke-width:1;
     transition: 0.2s;
-  }
+  }*/
   .wrapper {
     position: relative;
     width:100vw;
@@ -54,8 +56,10 @@
     z-index:100;
   }
   .flow-line {
-    stroke-opacity:0.5;
-    stroke:black;
+    stroke-opacity:0.05;
+    stroke-width:2;
+    stroke:blue;
+    stroke-linecap:round;
   }
   </style>
 </head>
@@ -70,16 +74,13 @@
   d3.json("world.json",function(error, world) {
     if (error) return console.error(error);
 
-    //IMPORTANT VARIABLES
+    //set up variables
     var countrydata = topojson.feature(world, world.objects.countries).features;
     var map = d3.select("#main-map");
     var projection = d3.geoMercator()
       .center([0, 30.4]);
-
     var path = d3.geoPath()
       .projection(projection);
-
-    console.log(path);
 
     //set up color scale for gdp
     var gdpMin = d3.min(countrydata, function(d) {return +d.properties.gdp}),
@@ -104,11 +105,11 @@
         })
         .attr("stroke",function(d){
           console.log(d.properties.eu);
-          return (d.properties.balance == true) ? "blue" : "white"
+          return (d.properties.eu == true) ? "blue" : "white"
         });
 
     //import trade flow data
-    d3.csv('tradeflow2.csv',function row(d) {
+    d3.csv('tradeflow.csv',function row(d) {
       return {
         reporter: d.reporterIso,
         partner: d.partnerIso,
@@ -138,7 +139,7 @@
         var flowLayer = map.append("g").attr("class","flow");
 
         //draw trade lines
-        map.append("g")
+        flowLayer.append("g")
         .selectAll(".flow")
           .data(flow)
         .enter()
@@ -152,27 +153,39 @@
               var text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
               return text;
             })
-            .attr("class","flow-line");
+            .attr("class","flow-line")
+            .style("opacity","0")
+          .transition().style("opacity","1").duration(100);
+
+        //add svg group for text and append country name labels
+        map.append("g").attr("id","text")
+          .selectAll("g")
+            .data(countrydata)
+          .enter()
+              .append("g")
+                .append("text")
+                  .text(function(d) {return d.properties.name})
+                  .attr("transform",function(d) {return "translate(" + path.centroid(d) + ")"})
+                  .attr("dx","1px")
+                  .attr("dy","2px");
+
+        //draw point cicles next to country name labels
+        map.select("g#text")
+          .selectAll("g")
+            .data(countrydata)
+            .filter(function(d){
+              console.log(d.properties.name);
+              if(typeof d.properties.name != 'undefined') {return d}
+            })
+            .append("circle")
+              .attr("r",".5")
+              .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
+
+
+
+
         }
       )
-
-    //add svg group for text and append country name labels
-    var textLayer = map.append("g").attr("class","text")
-      .selectAll("text")
-        .data(countrydata)
-      .enter()
-          .append("text")
-            .text(function(d) {return d.properties.name})
-            .attr("transform",function(d) {return "translate(" + path.centroid(d) + ")"})
-            .attr("dx","3px")
-            .attr("dy","4px");
-
-    //draw point cicles next to country name labels 
-    textLayer.filter(function(d){
-      if(d.properties.name) {return d}})
-      .append("circle")
-        .attr("r","1")
-        .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
   })
 </script>
 </html>
