@@ -152,7 +152,7 @@
         })
           .append("path")
             .attr("d",function(d) {
-              let country = filterCountry(d),
+              var country = filterCountry(d),
               x1 = path.centroid(country[0][0])[0],
               y1 = path.centroid(country[0][0])[1],
               x2 = path.centroid(country[1][0])[0],
