@@ -1,3 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="150px">
-    <path fill="#F7931E" stroke="#000" d="M37,17c15H14V17z M50,0H0v50h50z"/>
-</svg>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+body {
+  margin:0;
+}
+  </style>
+</head>
+<body >
+  <svg width="400" height="400">
+    <rect width="200" height="400" style="fill:url('#flowGrad');">
+
+    </rect>
+    <defs>
+      <linearGradient id="flowGrad" gradientTransform="rotate(0,0.5,0.5)">
+          <!-- <animate attributeName="gradientTransform" from="rotate(90,0,0)" to="rotate(360,0,0)" dur="20s" repeatCount="indefinite"></animate> -->
+          <stop offset="50%"  stop-color="yellow"></stop>
+          <stop offset="50%" stop-color="blue"></stop>
+      </linearGradient>
+  </defs>
+  </svg>
+
+</body>
+</html>

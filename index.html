@@ -15,20 +15,23 @@
     margin:0;
     width:100%;
     height:100%;
-    background-color: #62eaee;
+    /*background-color: #62eaee;*/
+    background-color: #455269;
     font-family: 'Oswald', sans-serif;
     font-weight:300;
   }
   path.country {
+    fill-opacity:0.8;
     stroke-linejoin:round;
     stroke-width:.5;
+    /*stroke:black;*/
     /*stroke:none;*/
   }
   text {
     font-size:.3em;
   }
   circle {
-    fill:none;
+    fill:black;
     stroke:black;
     stroke-width:.5;
   }
@@ -41,11 +44,11 @@
     width:100%;
     height:100%;
   }
-  /*.country:hover {
-    stroke:red;
-    stroke-width:1;
+  .country:hover {
+    fill-opacity:1;
+    /*stroke-width:1;*/
     transition: 0.2s;
-  }*/
+  }
   .wrapper {
     position: relative;
     width:100vw;
@@ -57,26 +60,33 @@
   }
   .flow-line {
     stroke-opacity:0.5;
-    stroke-width:.8;
+    stroke-width:0.5;
     stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .flow-line:hover {
+    stroke-width:5;
   }
   .flowtype-export {
     stroke:blue;
+    /*stroke:url('#exflowGrad');*/
   }
   .flowtype-import {
-    stroke:url('#flowGrad');
+    stroke:yellow;
+    /*stroke:url('#imflowGrad');*/
+
   }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <svg id="main-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMin meet">
-      <defs>
-        <linearGradient id="flowGrad">
+      <!-- <defs>
+        <linearGradient id="exflowGrad">
             <stop offset="5%"  stop-color="yellow"/>
             <stop offset="95%" stop-color="blue"/>
         </linearGradient>
-    </defs>
+    </defs> -->
     </svg>
   </div>
 
@@ -105,8 +115,9 @@
 
     //set domain and range for gdp color scale
     var gdpScale = d3.scaleLog()
-      .domain([761, 18036648])
-      .range(["#5cb1f7","#eb384e"]);
+      .domain([761, 3363447, 18036648])
+      //samoa, germany, usa
+      .range(["#95cfff",'#5c2bff',"#eb384e"]);
 
     //balanceScale: d3.extent(countrydata, function(d) {return +d.properties.balance})
     var balanceScale = d3.scaleLinear()
@@ -124,7 +135,7 @@
             return (d.properties.gdp == null) ?  "#c3c3c3" : gdpScale(+d.properties.gdp)
         })
         .attr("stroke",function(d){
-          return (d.properties.eu == true) ? "blue" : "white"
+          return (d.properties.eu == true) ? "#2440d4" : "black"
         });
 
     //import trade flow data
@@ -151,8 +162,110 @@
               return d;
             }
           });
-          return [rep, part];
+          var flow = +key.flowType;
+          // console.log(flow);
+          // console.log(key);
+          // console.log(key.flowType);
+          return [rep, part, flow];
         };
+
+        //get centroid coordinates for the reporting country(0,1) and partner country(2,3)
+        function getPoints(country) {
+          var c = filterCountry(country);
+          var f = c[2];
+          // console.log(c);
+          if(f == 0) {
+            var x1 = path.centroid(c[0][0])[0],
+                y1 = path.centroid(c[0][0])[1],
+                x2 = path.centroid(c[1][0])[0],
+                y2 = path.centroid(c[1][0])[1];
+                return [x1, y1, x2, y2, f];
+          }
+          if (f == 1) {
+            var x1 = path.centroid(c[1][0])[0],
+                y1 = path.centroid(c[1][0])[1],
+                x2 = path.centroid(c[0][0])[0],
+                y2 = path.centroid(c[0][0])[1];
+                return [x1, y1, x2, y2, f];
+          }
+          else {
+            return [0,0,0,0,3]
+          }
+        };
+
+        // function ()
+
+        function computeAngle(country) {
+          console.log(country);
+          var points = getPoints(country);
+          var x1 = points[0], y1 = points[1], x2 = points[2], y2 = points[3];
+          var xDiff = Math.abs(x2 - x1), yDiff = Math.abs(y2 - y1);
+          var lineLength = Math.sqrt(Math.pow(xDiff,2) + Math.pow(yDiff,2));
+          var thetaRad = Math.acos(xDiff / lineLength);
+          // var theta = thetaRad * (180 / Math.PI);
+          // if (x2 > x1) {
+          //   if (y2 > y1) {
+          //     theta = 90 + theta;
+          //   }
+          //   if (y2 < y1) {
+          //     theta = 360 + theta;
+          //   }
+          // }
+          // if (x1 > x2) {
+          //   if (y2 > y1) {
+          //     theta = 270 - theta
+          //   }
+          //   if (y2 < y1) {
+          //     theta = 270 + theta
+          //   }
+          // };
+          // // console.log(xDiff, yDiff);
+          // // console.log()
+          // if (theta < 360 && theta > 270) {
+          //   var newY = Math.tan(theta - 90)
+          //   var atan = Math.atan((newY*yDiff)/xDiff)
+          //   theta = 90 + atan;
+          // }
+          let theta, i = 0;
+          if (x2 < x1 && y2 < y1 ) {
+            console.log("flip!");
+            theta = 180;
+            return theta;
+          }
+          if (x2 < x1 && y2 > y1) {
+            console.log("flip!");
+            theta = 180;
+            return theta;
+
+          }
+          if (x2 > x1 && y2 < y1) {
+            theta = 0;
+            return theta;
+          }
+          if (x2 > x1 && y2 > y1) {
+            theta = 0;
+            return theta;
+          }
+        }
+
+        //create strokes for every country
+        var defs = map.append('defs');
+        defs.selectAll('linearGradient').data(countrydata).enter()
+          .append('linearGradient')
+            .attr("id",function(d){return d.id + "0"});
+        defs.selectAll('linearGradient').append('stop')
+          .attr("offset","50%").attr("stop-color","yellow")
+        defs.selectAll('linearGradient').append('stop')
+          .attr("offset","50%").attr("stop-color","cyan");
+
+        defs.selectAll('placeholder').data(countrydata).enter()
+          .append('linearGradient')
+            .attr("id",function(d){return d.id + "1"});
+        defs.selectAll('linearGradient').append('stop')
+          .attr("offset","5%").attr("stop-color","yellow")
+        defs.selectAll('linearGradient').append('stop')
+          .attr("offset","95%").attr("stop-color","cyan");
+
 
         //create svg group to append flow lines into
         var flowLayer = map.append("g").attr("class","flow");
@@ -163,16 +276,32 @@
             .data(flow)
         .enter()
         .filter(function(d){
-          if (+d.flowRank == 1) { return d}
+          // && +d.flowType == 0
+          // && (d.reporter == "USA" || d.partner == "CHN")
+          if ((+d.flowRank == 1 ) ) { return d}
         })
           .append("path")
             .attr("d",function(d) {
-              let country = filterCountry(d),
-              x1 = path.centroid(country[0][0])[0],
-              y1 = path.centroid(country[0][0])[1],
-              x2 = path.centroid(country[1][0])[0],
-              y2 = path.centroid(country[1][0])[1],
+              let country = getPoints(d);
+              var x1 = country[0],
+              y1 = country[1],
+              x2 = country[2],
+              y2 = country[3],
               text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
+              console.log("--s---")
+              let flowType;
+              (+d.flowType == 0) ? flowType = "export" : flowType = "import";
+              let flowVb;
+              (flowType == "export") ? flowVb = "to" : flowVb = "from ";
+              console.log(d.reporter + " "+ flowType + "s " + flowVb + " " + d.partner);
+              console.log(country);
+              console.log(text);
+              // console.log(computeAngle(d));
+              if (computeAngle(d) == 340) {
+                console.log(d.reporter);
+              };
+              // console.log(computeAngle(d) % 90);
+              console.log("---f--")
               return text;
             })
             .attr("class",function(d) {
@@ -181,8 +310,8 @@
               (+d.flowType == 0) ? flowType = "export" : flowType = "import";
               return "flow-line flowtype-" + flowType;
             })
-            .style("opacity","0")
-          .transition().style("opacity","1").duration(100);
+            .style("stroke",function(d){return "url('#" + d.reporter + d.flowType + "')"});
+        // flowLayer.selectAll("g").select("text").data(flow).enter().append("text").text(function(d) { });
 
         //add svg group for text and append country name labels
         map.append("g").attr("id","text")
@@ -206,6 +335,13 @@
             .append("circle")
               .attr("r",".5")
               .attr("transform",function(d){return "translate(" + path.centroid(d) + ')'});
+
+        defs.selectAll('linearGradient').data(flow)
+          .attr('gradientTransform',function(d) {
+            var angle = computeAngle(d);
+            // var angle = 0;
+            return "rotate(" + angle + ",0.5,0.5)";
+          });
 
 
 
