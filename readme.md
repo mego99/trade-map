@@ -11,6 +11,7 @@
  * countries with no data
  * color scales
 * move labels: labels must be (1) physically located on top of the land mass (2) located on the biggest isolated land mass in that sovereignty (3) not overlapping other labels
+  * solution:
 * mobile: force landscape?
 
 ### Specific Chart properties
