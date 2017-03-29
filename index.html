@@ -8,7 +8,7 @@
   <script src="scripts/topojson.v1.min.js"></script>
   <script src="scripts/d3-geo-projection.v1.min.js"></script>
 
-  <title>Document</title>
+  <title>The World of Trade</title>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Oswald:300,400');
   body {
@@ -30,6 +30,10 @@
   text {
     fill:white;
     font-size:.3em;
+    pointer-events: none;
+    cursor: pointer;
+    /*stroke:black;*/
+    /*stroke-width:0.1;*/
   }
   circle {
     fill:black;
@@ -75,19 +79,19 @@
   .flowtype-import {
     stroke:yellow;
     /*stroke:url('#imflowGrad');*/
-
+  }
+  .explorer-rect {
+    fill:#2d2d2d;
+    fill-opacity:0.5;
+  }
+  .explorer-lavel {
+    fill-opacity:1;
   }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <svg id="main-map" viewBox="0 0 960 600" preserveAspectRatio="xMidYMin meet">
-      <!-- <defs>
-        <linearGradient id="exflowGrad">
-            <stop offset="5%"  stop-color="yellow"/>
-            <stop offset="95%" stop-color="blue"/>
-        </linearGradient>
-    </defs> -->
     </svg>
   </div>
 
@@ -197,7 +201,7 @@
         // function ()
 
         function computeAngle(country) {
-          console.log(country);
+          // console.log(country);
           var points = getPoints(country);
           var x1 = points[0], y1 = points[1], x2 = points[2], y2 = points[3];
           var xDiff = Math.abs(x2 - x1), yDiff = Math.abs(y2 - y1);
@@ -229,12 +233,12 @@
           // }
           let theta, i = 0;
           if (x2 < x1 && y2 < y1 ) {
-            console.log("flip!");
+            // console.log("flip!");
             theta = 180;
             return theta;
           }
           if (x2 < x1 && y2 > y1) {
-            console.log("flip!");
+            // console.log("flip!");
             theta = 180;
             return theta;
 
@@ -271,6 +275,9 @@
         //create svg group to append flow lines into
         var flowLayer = map.append("g").attr("class","flow");
 
+        var explorer = map.append("g")
+          .attr("class","explorer");
+
         //draw trade lines
         flowLayer.append("g")
         .selectAll(".flow")
@@ -289,30 +296,92 @@
               x2 = country[2],
               y2 = country[3],
               text = "M"+x1+","+y1+" L "+x2+","+y2+" Z";
-              console.log("--s---")
+              // console.log("--s---")
               let flowType;
               (+d.flowType == 0) ? flowType = "export" : flowType = "import";
               let flowVb;
               (flowType == "export") ? flowVb = "to" : flowVb = "from ";
-              console.log(d.reporter + " "+ flowType + "s " + flowVb + " " + d.partner);
-              console.log(country);
-              console.log(text);
-              // console.log(computeAngle(d));
+              // console.log(d.reporter + " "+ flowType + "s " + flowVb + " " + d.partner);
+              // console.log(country);
+              // console.log(text);
               if (computeAngle(d) == 340) {
                 console.log(d.reporter);
               };
-              // console.log(computeAngle(d) % 90);
-              console.log("---f--")
+              // console.log("---f--")
               return text;
             })
             .attr("class",function(d) {
-              // console.log(+d.flowBinary);
               let flowType;
               (+d.flowType == 0) ? flowType = "export" : flowType = "import";
               return "flow-line flowtype-" + flowType;
             })
             .style("stroke",function(d){return "url('#" + d.reporter + d.flowType + "')"});
         // flowLayer.selectAll("g").select("text").data(flow).enter().append("text").text(function(d) { });
+
+        // var test = d3.select("placeholder").enter("svg")
+        //   .append("text").text("world");
+
+        // console.log(test);
+
+        d3.select("g.countries").selectAll('path').data(countrydata)
+        // d3.select("body")
+          .on("mousemove",function(d) {
+            // console.log("mouse event");
+            // console.log(d3.mouse(this));
+            var pos = d3.mouse(this);
+            // console.log(d);
+            var group = explorer.append("g");
+
+            var explorerWidth = [];
+
+            group.append("rect")
+              .attr("x",pos[0])
+              .attr("y",pos[1])
+              .attr("width",function() {
+                // var width = this.getComputedTextLength();
+                // console.log(width);
+                // console.log(+width);
+                return 100;
+              })
+              .attr("height",40)
+              .attr("class","explorer-rect")
+              .attr("rx",3)
+              .attr("ry",3);
+
+            group.append("text")
+              .text(d.properties.name)
+              .attr("transform",function(d) {
+                var x = pos[0] + 5, y = pos[1] + 15;
+                return "translate(" + x + "," + y + ")"
+              })
+              .attr('class',function(d) {
+                var width =  this.getComputedTextLength
+                console.log(width);
+                return "explorer-label";
+              });
+              // .attr("class","");
+
+            group.append("text")
+              .text("GDP: " + d.properties.gdp + " (million $)")
+              .attr("transform",function(d) {
+                var x = pos[0] + 5, y = pos[1] + 30;
+                return "translate(" + x + "," + y + ")"
+              })
+              .attr("class","explorer-caption");
+
+
+            explorer.selectAll("g:not(:last-child)").remove();
+          })
+          .on("mouseout",function(d) {
+            explorer.selectAll("g").remove();
+          });
+        //
+        //
+        // d3.select("g.countries").selectAll('path').data(countrydata)
+        //   .on("click",function(d) {
+        //       map.selectAll("g, defs").remove();
+        // })
+
 
         //add svg group for text and append country name labels
         map.append("g").attr("id","text")
@@ -343,9 +412,6 @@
             // var angle = 0;
             return "rotate(" + angle + ",0.5,0.5)";
           });
-
-
-
 
         }
       )
